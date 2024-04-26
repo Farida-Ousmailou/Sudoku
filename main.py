@@ -39,3 +39,9 @@ def find_empty_cell(grid):
             if grid[i][j] == 0:
                 return (i,j)
     return None
+
+def is_valid(grid, row, col, num):
+
+    for i in range(9):
+        if grid[row][i] == num:
+            return False
