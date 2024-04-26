@@ -30,3 +30,12 @@ def solve_sudoku(grid):
                 return True
             grid[row][col] = 0 
     return False
+
+
+def find_empty_cell(grid):
+
+    for i in range(9):
+        for j in range(9):
+            if grid[i][j] == 0:
+                return (i,j)
+    return None
