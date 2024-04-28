@@ -96,3 +96,52 @@ def move_cursor(current_row, current_col, direction):
     else:
         print("Saisi invalid")
     return current_row, current_col
+
+
+
+def play_sudoku():
+    
+    sudoku_grid = generate_sudoku_grid()
+
+    
+    current_row, current_col = 0, 0
+
+    
+    while True:
+        
+        print_sudoku_grid(sudoku_grid, current_row, current_col)
+
+        
+        direction = input("Entrez une direction (Haut: K, Bas: J, Gauche: H, Droite: I) ou Q pour quitter : ").upper()
+
+       
+        if direction == 'Q':
+            print("Au revoir !")
+            break
+
+        
+        current_row, current_col = move_cursor(current_row, current_col, direction)
+
+       
+        if sudoku_grid[current_row][current_col] == 0:
+            number = int(input("Entrez un nombre (1-9) pour cette case : "))
+
+            
+            if is_valid(sudoku_grid, current_row, current_col, number):
+                sudoku_grid[current_row][current_col] = number
+                print("Grille mise à jour :")
+                # print_sudoku_grid(sudoku_grid, current_row, current_col)
+            else:
+                print("Ce nombre n'est pas valide. Veuillez choisir un nombre valide.")
+                continue
+
+            
+            if solve_sudoku(sudoku_grid):
+                print("Bravo ! Vous avez insérer le bon chiffre dans le Sudoku !")
+
+            elif find_empty_cell(sudoku_grid) is None:
+                print("La grille est remplie mais la solution n'est pas valide. Veuillez réessayer.")
+                break
+
+if __name__ == '__main__':
+    play_sudoku()
