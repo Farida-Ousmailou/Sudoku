@@ -31,7 +31,6 @@ def solve_sudoku(grid):
             grid[row][col] = 0 
     return False
 
-
 def find_empty_cell(grid):
 
     for i in range(9):
@@ -59,7 +58,6 @@ def is_valid(grid, row, col, num):
 
     return True
 
-
 def print_sudoku_grid(grid, current_row, current_col):
     # os.system('cls' if os.name == 'nt' else 'clear') 
     print("  - - - - - - - - - - - - ")
@@ -67,22 +65,17 @@ def print_sudoku_grid(grid, current_row, current_col):
         if i % 3 == 0 and i != 0:
             print(
                 " | - - - - - - - - - - - |") 
-
+            
         row_str = [str(num) if num != 0 else '.' for num in row]
         formatted_row = '|'.join(''.join(row_str[j:j + 3]) for j in range(0, 9, 3))
-
-       
         row_marker = '>' if i == current_row else ' '
 
         print(f"{row_marker}| {' '.join(formatted_row)} |")
 
-    
     col_marker = ' ' * (2 * current_col + 3) + '^'
     print(f"{col_marker}")
-
     print("  - - - - - - - - - - - - ")
     print(f"Position actuelle : ({current_row}, {current_col})")
-
 
 def move_cursor(current_row, current_col, direction):
     if direction == 'K':
@@ -97,35 +90,22 @@ def move_cursor(current_row, current_col, direction):
         print("Saisi invalid")
     return current_row, current_col
 
-
-
 def play_sudoku():
-    
     sudoku_grid = generate_sudoku_grid()
-
-    
     current_row, current_col = 0, 0
-
     
     while True:
-        
         print_sudoku_grid(sudoku_grid, current_row, current_col)
-
-        
         direction = input("Entrez une direction (Haut: K, Bas: J, Gauche: H, Droite: I) ou Q pour quitter : ").upper()
-
        
         if direction == 'Q':
             print("Au revoir !")
             break
 
-        
         current_row, current_col = move_cursor(current_row, current_col, direction)
 
-       
         if sudoku_grid[current_row][current_col] == 0:
             number = int(input("Entrez un nombre (1-9) pour cette case : "))
-
             
             if is_valid(sudoku_grid, current_row, current_col, number):
                 sudoku_grid[current_row][current_col] = number
@@ -134,7 +114,6 @@ def play_sudoku():
             else:
                 print("Ce nombre n'est pas valide. Veuillez choisir un nombre valide.")
                 continue
-
             
             if solve_sudoku(sudoku_grid):
                 print("Bravo ! Vous avez insérer le bon chiffre dans le Sudoku !")
