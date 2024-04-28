@@ -45,3 +45,40 @@ def is_valid(grid, row, col, num):
     for i in range(9):
         if grid[row][i] == num:
             return False
+    
+    for i in range(9):
+        if grid[i][col] == num:
+            return False
+
+    start_row = 3 * (row // 3)
+    start_col = 3 * (col // 3)
+    for i in range(start_row, start_row + 3):
+        for j in range(start_col, start_col + 3):
+            if grid[i][j] == num:
+                return False
+
+    return True
+
+
+def print_sudoku_grid(grid, current_row, current_col):
+    # os.system('cls' if os.name == 'nt' else 'clear') 
+    print("  - - - - - - - - - - - - ")
+    for i, row in enumerate(grid):
+        if i % 3 == 0 and i != 0:
+            print(
+                " | - - - - - - - - - - - |") 
+
+        row_str = [str(num) if num != 0 else '.' for num in row]
+        formatted_row = '|'.join(''.join(row_str[j:j + 3]) for j in range(0, 9, 3))
+
+       
+        row_marker = '>' if i == current_row else ' '
+
+        print(f"{row_marker}| {' '.join(formatted_row)} |")
+
+    
+    col_marker = ' ' * (2 * current_col + 3) + '^'
+    print(f"{col_marker}")
+
+    print("  - - - - - - - - - - - - ")
+    print(f"Position actuelle : ({current_row}, {current_col})")
