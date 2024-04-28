@@ -82,3 +82,17 @@ def print_sudoku_grid(grid, current_row, current_col):
 
     print("  - - - - - - - - - - - - ")
     print(f"Position actuelle : ({current_row}, {current_col})")
+
+
+def move_cursor(current_row, current_col, direction):
+    if direction == 'K':
+        current_row = (current_row - 1) % 9
+    elif direction == 'J':
+        current_row = (current_row + 1) % 9
+    elif direction == 'H':
+        current_col = (current_col - 1) % 9
+    elif direction == 'I':
+        current_col = (current_col + 1) % 9
+    else:
+        print("Saisi invalid")
+    return current_row, current_col
